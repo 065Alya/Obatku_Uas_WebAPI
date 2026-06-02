@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#185FA5">
+    <title>ObatKu — Sedang Offline</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary:   #185FA5;
+            --ecomed:    #1D9E75;
+            --dark:      #042C53;
+            --bg:        #F8FAFF;
+            --warning:   #EF9F27;
+            --text:      #1e293b;
+            --muted:     #64748b;
+            --card-bg:   #ffffff;
+            --radius:    1rem;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo-icon {
+            width: 48px; height: 48px;
+            background: var(--primary);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .logo-icon svg { width: 26px; height: 26px; color: #fff; }
+
+        .logo-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.02em;
+        }
+
+        .offline-illustration {
+            width: 140px; height: 140px;
+            background: linear-gradient(135deg, #e8f0fa 0%, #c5daf2 100%);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex; align-items: center; justify-content: center;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .offline-illustration svg { width: 72px; height: 72px; color: var(--primary); opacity: 0.85; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50%       { transform: scale(1.04); opacity: 0.9; }
+        }
+
+        h1 {
+            font-size: 1.625rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.65;
+            margin-bottom: 2rem;
+        }
+
+        /* Offline Features */
+        .features {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .features-title {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .feature-item:last-child { border-bottom: none; }
+
+        .feature-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-green  { background: var(--ecomed); }
+        .dot-yellow { background: var(--warning); }
+        .dot-blue   { background: var(--primary); }
+        .dot-gray   { background: #cbd5e1; }
+
+        .feature-text { font-size: 0.9375rem; color: var(--text); }
+        .feature-tag {
+            margin-left: auto;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+        }
+
+        .tag-available { background: #e6f7f1; color: var(--ecomed); }
+        .tag-limited   { background: #fef5e6; color: #b97a17; }
+        .tag-offline   { background: #f1f5f9; color: var(--muted); }
+
+        /* Actions */
+        .actions { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+
+        .btn {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #145294;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(24,95,165,.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover { background: var(--primary); color: #fff; }
+
+        .status-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #E24B4A;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        .status-dot.online { background: var(--ecomed); animation: none; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+
+        .footer-text {
+            font-size: 0.8125rem;
+            color: var(--muted);
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            h1 { font-size: 1.875rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Logo -->
+        <div class="logo-wrap">
+            <div class="logo-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                </svg>
+            </div>
+            <span class="logo-name">ObatKu</span>
+        </div>
+
+        <!-- Illustration -->
+        <div class="offline-illustration">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      d="M18.364 5.636a9 9 0 010 12.728m-3.536-3.536a5 5 0 000-7.072M9.172 14.828a5 5 0 010-7.072M5.636 18.364a9 9 0 010-12.728M12 12h.01"/>
+            </svg>
+        </div>
+
+        <h1>Anda Sedang Offline</h1>
+        <p class="subtitle">
+            Tidak ada koneksi internet saat ini.<br>
+            Beberapa fitur ObatKu tetap tersedia dalam mode offline.
+        </p>
+
+        <!-- Offline Feature Status -->
+        <div class="features">
+            <p class="features-title">Status Fitur Offline</p>
+
+            <div class="feature-item">
+                <div class="feature-dot dot-green"></div>
+                <span class="feature-text">Jadwal Obat Hari Ini</span>
+                <span class="feature-tag tag-available">Tersedia</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot dot-green"></div>
+                <span class="feature-text">Daftar Obat (tersimpan)</span>
+                <span class="feature-tag tag-available">Tersedia</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot dot-green"></div>
+                <span class="feature-text">Panduan EcoMed</span>
+                <span class="feature-tag tag-available">Tersedia</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot dot-yellow"></div>
+                <span class="feature-text">Catat Konsumsi Obat</span>
+                <span class="feature-tag tag-limited">Antre Sync</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot dot-gray"></div>
+                <span class="feature-text">Tambah Obat Baru</span>
+                <span class="feature-tag tag-offline">Perlu Online</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-dot dot-gray"></div>
+                <span class="feature-text">Artikel Kesehatan Baru</span>
+                <span class="feature-tag tag-offline">Perlu Online</span>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button class="btn btn-primary" id="retryBtn" onclick="retryConnection()">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                Coba Sambung Kembali
+            </button>
+            <a href="/dashboard" class="btn btn-outline">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Buka Halaman Tersimpan
+            </a>
+        </div>
+
+        <!-- Connection Status -->
+        <div class="status-bar">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Tidak terhubung ke internet</span>
+        </div>
+
+        <p class="footer-text">
+            Data yang Anda catat saat offline akan otomatis tersinkronisasi<br>
+            setelah koneksi internet kembali terhubung.
+        </p>
+
+    </div>
+
+    <script>
+        function updateStatus() {
+            const dot  = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+
+            if (navigator.onLine) {
+                dot.classList.add('online');
+                text.textContent = 'Koneksi tersedia — mengalihkan...';
+                setTimeout(() => { window.location.href = '/dashboard'; }, 1500);
+            } else {
+                dot.classList.remove('online');
+                text.textContent = 'Tidak terhubung ke internet';
+            }
+        }
+
+        function retryConnection() {
+            const btn = document.getElementById('retryBtn');
+            btn.textContent = 'Mencoba menghubungkan...';
+            btn.disabled = true;
+
+            fetch('/manifest.json', { cache: 'no-store' })
+                .then(() => {
+                    window.location.href = '/dashboard';
+                })
+                .catch(() => {
+                    btn.innerHTML = `
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Coba Sambung Kembali`;
+                    btn.disabled = false;
+                });
+        }
+
+        window.addEventListener('online',  updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus();
+    </script>
+</body>
+</html>
